@@ -1,0 +1,46 @@
+import { test, expect } from './audit-fixture.js';
+import { globalClick } from './global-actions.js';
+import { readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
+const seed=JSON.parse(readFileSync(new URL('../public/roadmap.json',import.meta.url),'utf8'));
+const mod=process.platform==='darwin'?'Meta':'Control';
+const draft=page=>page.evaluate(()=>JSON.parse(localStorage.getItem('drag.draft')));
+
+for(const startupMode of ['infographic','last'])test(`legacy ${startupMode} startup opens picture while preserving model, locks and saved picture settings`,async({page})=>{
+ const model=structuredClone(seed);
+ model.metadata={preserved:['legacy',{value:23}]};model.projects[0].phases[0].locks={start:true,end:true,label:true};
+ model.presentation={title:'保留圖片設定',start:'2027-01-01',end:'2028-06-30',dateLineMode:'custom',dateLineDate:'2027-07-01',locks:{title:true,start:true}};
+ await page.addInitScript(({model,startupMode})=>{
+  if(localStorage.getItem('retired-mode.seeded'))return;
+  localStorage.setItem('drag.draft',JSON.stringify(model));
+  localStorage.setItem('drag.preferences',JSON.stringify({version:1,values:{startupMode,rememberPictures:true,theme:'dark',uiSize:'small',autoBackup:false,shortcuts:{infographic:'Mod+2',simple:'Mod+8',save:'Mod+Alt+s'}}}));
+  localStorage.setItem('drag.workspace',JSON.stringify({mode:'infographic',view:'Year',pictures:{simple:{zoom:1.75,center:{x:.5,y:.5}},infographic:{zoom:2.5,center:{x:.4,y:.6}}}}));
+  localStorage.setItem('retired-mode.seeded','1');
+ },{model,startupMode});
+ await page.goto('/');
+ await expect(page.locator('.tabs button')).toHaveText(['時間軸','圖檔']);
+ await expect(page.locator('[data-action="infographic"]')).toHaveCount(0);
+ await expect(page.locator('[data-action="simple"]')).toHaveAttribute('aria-pressed','true');
+ await expect(page.locator('.roadmap-simple')).toBeVisible();
+ await expect(page.locator('output[data-picture-zoom]')).toHaveText('175%');
+ expect(await draft(page)).toEqual(model);
+ await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
+ await globalClick(page,'settings');
+ await page.locator('[data-settings-category="workspace"]').click();
+ expect(await page.locator('[data-pref="startupMode"] option').evaluateAll(options=>options.map(o=>o.value))).toEqual(['timeline','simple','last']);
+ await page.locator('[data-settings-category="editing"]').click();
+ await expect(page.locator('[data-shortcut="infographic"]')).toHaveCount(0);
+ await expect(page.locator('[data-shortcut="simple"]')).toHaveValue('Mod+8');
+ await page.keyboard.press('Escape');
+ await page.locator('[data-action="timeline"]').click();
+ await page.locator('.brand').click();await page.keyboard.press(mod+'+2');
+ await expect(page.locator('[data-action="timeline"]')).toHaveAttribute('aria-pressed','true');
+ await page.keyboard.press(mod+'+8');
+ await expect(page.locator('[data-action="simple"]')).toHaveAttribute('aria-pressed','true');
+ const pending=page.waitForEvent('download');await globalClick(page,'save');const file=await pending;
+ expect(JSON.parse(await readFile(await file.path(),'utf8'))).toEqual(model);
+ await page.reload();await expect(page.locator('.roadmap-simple')).toBeVisible();
+ expect(await draft(page)).toEqual(model);
+ const pictures=await page.evaluate(()=>JSON.parse(localStorage.getItem('drag.workspace')).pictures);
+ expect(pictures.simple.zoom).toBe(1.75);expect(pictures.infographic.zoom).toBe(2.5);
+});

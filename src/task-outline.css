@@ -1,0 +1,67 @@
+/* Workspace regions 4 and 5: the editor is attached to the outline. */
+#app #tree .tree-item {position:relative;cursor:pointer;min-height:var(--field-height);gap:4px}
+#app #tree .tree-item:focus-visible {outline:2px solid var(--studio-accent);outline-offset:-2px}
+#app #tree .tree-item .tree-label {flex:1;min-width:0}
+#app #tree .tree-item.phase {padding-inline-start:24px}
+#app #tree .outline-task-copy {display:grid;flex:1;min-width:0;gap:2px}
+#app #tree .outline-task-copy>.outline-rename {width:100%}
+#app #tree .outline-tracking {display:flex;align-items:baseline;gap:6px;min-width:0;color:var(--studio-muted);font-size:max(11px,.9em);font-weight:500;line-height:1.3}
+#app #tree .outline-status {min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#app #tree .outline-progress {flex:none;max-width:100%;overflow:hidden;text-overflow:ellipsis;color:var(--studio-accent);font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
+#app #tree .tree-item .drag-handle {cursor:grab}
+#app #tree .tree-item.is-dragging {opacity:.48}
+#app #tree .outline-fold {flex:none;padding:0;width:20px;height:24px;min-width:0;border:0;background:transparent;color:var(--studio-muted)}
+#app #tree [data-drop=inside] {background:var(--studio-selected);outline:2px dashed var(--studio-accent);outline-offset:-2px}
+#app #tree [data-drop=before]::before,#app #tree [data-drop=after]::after {content:'';position:absolute;inset-inline:6px;height:3px;background:var(--studio-accent);border-radius:2px;pointer-events:none}
+#app #tree [data-drop=before]::before {top:-1px}
+#app #tree [data-drop=after]::after {bottom:-1px}
+#app #tree .outline-rename {min-width:0;width:0;flex:1;border:1px solid var(--studio-accent);border-radius:4px;padding:3px 4px;background:var(--studio-surface);color:var(--studio-ink);font:inherit}
+#app .editor-title .outline-close {position:absolute;inset:8px 8px auto auto;display:grid;place-items:center;width:30px;height:30px;padding:0;font-size:20px;line-height:1;background:transparent}
+#app .editor-title .editor-selection,#app .editor-title h2 {padding-inline-end:22px}
+#app #editor [data-outline-parent] {width:100%;min-width:0;border:1px solid var(--studio-line);border-radius:6px;padding:7px;background:var(--studio-soft);color:var(--studio-ink);font:inherit}
+#app main>.bottom[hidden],#app main>.split[hidden],#app #tree [role=group][hidden] {display:none!important}
+@media(min-width:701px) {
+  #app main[data-inspector] {
+    grid-template-columns:var(--sidebar-width,224px) minmax(0,1fr);
+    grid-template-rows:minmax(0,1fr)!important;
+    --drawer-width:min(var(--inspector-width,300px),calc(100% - 16px));
+    --drawer-height:min(560px,calc(100% - 16px));
+    --drawer-x:clamp(8px,var(--drawer-start,calc(var(--sidebar-width,224px) + 4px)),calc(100% - var(--drawer-width) - 8px));
+    --drawer-y:clamp(8px,calc(var(--selected-row-y,8px) - 12px),calc(100% - var(--drawer-height) - 8px));
+  }
+  #app main[data-inspector]>.bottom,#app main[data-inspector]>.split {
+    position:absolute;grid-area:auto;top:var(--drawer-y);height:var(--drawer-height);box-sizing:border-box;
+  }
+  #app main[data-inspector]>.bottom {
+    inset-inline-start:var(--drawer-x);width:var(--drawer-width);z-index:5;border:1px solid var(--studio-line);
+    border-radius:12px;background:var(--studio-surface);box-shadow:0 8px 32px #19292328;
+  }
+  #app main[data-inspector]>.split {
+    inset-inline-start:calc(var(--drawer-x) + var(--drawer-width) - 2px);width:5px;z-index:6;touch-action:none;background:transparent;cursor:col-resize;
+  }
+  #app main>.split::after {width:2px;height:26px;left:1px;top:calc(50% - 13px)}
+  #app main>.bottom .editor-title {display:flex;flex-direction:column;align-items:flex-start}
+  #app main>.bottom .editor-sections {display:flex;flex-direction:column}
+  #app main>.bottom .editor-section .form {display:grid;grid-template-columns:minmax(0,1fr)}
+  #app.sidebar-hidden main {--drawer-x:8px}
+  #app .project-sidebar.is-short .sidebar-top {position:static}
+}
+@media(max-width:700px) {
+  #app main[data-inspector] {grid-template-rows:minmax(130px,32%) minmax(100px,1fr)!important}
+  #app main[data-inspector]>.bottom {
+    grid-column:1;grid-row:2;align-self:start;z-index:4;height:100%;width:100%;
+    background:var(--studio-surface);border-top:1px solid var(--studio-line);box-shadow:0 4px 12px #14251d1a;
+  }
+  #app main>.bottom .editor-title {padding-inline-end:36px}
+}
+#app #tree .outline-rename-button {display:inline-flex;visibility:hidden;margin-inline-start:auto;flex:none;width:24px;height:24px;align-items:center;justify-content:center;padding:0;border:0;color:var(--studio-muted);background:transparent}
+#app #tree .tree-item:is(.selected,:hover,:focus-within)>.outline-rename-button {visibility:visible}
+#app #tree .tree-item:has(.outline-rename)>.outline-rename-button {visibility:hidden}
+@media(max-width:700px){
+ #app .project-sidebar .document-picker {padding:6px 12px}
+ #app .project-sidebar .aside-title {padding:2px 10px}
+ #app #tree .outline-rename-button {width:32px;height:36px}
+}
+@media (max-width:700px), (pointer:coarse) {
+  #app #tree .tree-item {min-height:max(44px, var(--field-height))}
+}

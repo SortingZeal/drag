@@ -1,0 +1,182 @@
+{
+  "title": "專案時程範本",
+  "projects": [
+    {
+      "id": "example-project-1",
+      "name": "網站規劃",
+      "color": "#2563eb",
+      "icon": "★",
+      "phases": [
+        {
+          "id": "example-task-1-1",
+          "label": "需求整理",
+          "start": "2027-01-04",
+          "end": "2027-02-07",
+          "locks": {}
+        },
+        {
+          "id": "example-task-1-2",
+          "label": "版型設計",
+          "start": "2027-02-15",
+          "end": "2027-03-21",
+          "locks": {},
+          "milestone": "階段檢查"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-2",
+      "name": "功能開發",
+      "color": "#16a34a",
+      "icon": "⚙",
+      "phases": [
+        {
+          "id": "example-task-2-1",
+          "label": "流程實作",
+          "start": "2027-01-11",
+          "end": "2027-05-11",
+          "locks": {},
+          "milestone": "階段檢查"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-3",
+      "name": "品質驗證",
+      "color": "#9333ea",
+      "icon": "▣",
+      "phases": [
+        {
+          "id": "example-task-3-1",
+          "label": "整合測試",
+          "start": "2027-01-18",
+          "end": "2027-05-18",
+          "locks": {},
+          "milestone": "階段檢查"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-4",
+      "name": "產品試用",
+      "color": "#ea580c",
+      "icon": "⬡",
+      "phases": [
+        {
+          "id": "example-task-4-1",
+          "label": "原型製作",
+          "start": "2027-01-25",
+          "end": "2027-02-28",
+          "locks": {}
+        },
+        {
+          "id": "example-task-4-2",
+          "label": "試用回饋",
+          "start": "2027-03-08",
+          "end": "2027-04-11",
+          "locks": {}
+        },
+        {
+          "id": "example-task-4-3",
+          "label": "修訂",
+          "start": "2027-04-19",
+          "end": "2027-05-23",
+          "locks": {},
+          "milestone": "階段檢查"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-5",
+      "name": "內容製作",
+      "color": "#0891b2",
+      "icon": "●",
+      "phases": [
+        {
+          "id": "example-task-5-1",
+          "label": "素材整理",
+          "start": "2027-02-01",
+          "end": "2027-03-07",
+          "locks": {}
+        },
+        {
+          "id": "example-task-5-2",
+          "label": "內容編排",
+          "start": "2027-03-15",
+          "end": "2027-04-18",
+          "locks": {}
+        },
+        {
+          "id": "example-task-5-3",
+          "label": "檢查",
+          "start": "2027-04-26",
+          "end": "2027-05-30",
+          "locks": {},
+          "milestone": "階段檢查"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-6",
+      "name": "文件整理",
+      "color": "#db2777",
+      "icon": "⌘",
+      "phases": [
+        {
+          "id": "example-task-6-1",
+          "label": "文件草稿",
+          "start": "2027-02-08",
+          "end": "2027-03-14",
+          "locks": {}
+        },
+        {
+          "id": "example-task-6-2",
+          "label": "文件校對",
+          "start": "2027-03-22",
+          "end": "2027-04-25",
+          "locks": {},
+          "milestone": "階段檢查"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-7",
+      "name": "發布準備",
+      "color": "#ca8a04",
+      "icon": "◎",
+      "phases": [
+        {
+          "id": "example-task-7-1",
+          "label": "準備",
+          "start": "2027-02-15",
+          "end": "2027-03-21",
+          "locks": {}
+        },
+        {
+          "id": "example-task-7-2",
+          "label": "發布",
+          "start": "2027-03-29",
+          "end": "2027-05-02",
+          "locks": {}
+        },
+        {
+          "id": "example-task-7-3",
+          "label": "追蹤",
+          "start": "2028-01-03",
+          "end": "2028-06-30",
+          "locks": {},
+          "milestone": "階段檢查",
+          "light": true,
+          "open_end": true
+        }
+      ],
+      "locks": {}
+    }
+  ]
+}

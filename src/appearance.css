@@ -1,0 +1,151 @@
+/* Shell preferences live on <html> so portalled menus and native dialogs follow them. */
+:root {
+  --row-inset: 8px;
+  --group-gap: 14px;
+  --field-height: 36px;
+}
+:root[data-ui-density=compact] {
+  --row-inset: 2px;
+  --group-gap: 6px;
+  --field-height: 28px;
+}
+:root[data-ui-density=comfortable] {
+  --row-inset: 14px;
+  --group-gap: 22px;
+  --field-height: 44px;
+}
+:root[data-palette] {
+  --studio-muted: #59675e;
+  --studio-accent: #176352;
+  --studio-selected: #ddf1e8;
+  --surround-ink: color-mix(in srgb, var(--studio-accent) 18%, transparent);
+}
+:root[data-theme=dark][data-palette] {
+  --studio-accent: #9bdac2;
+  --studio-selected: #25473c;
+  --studio-muted: #a9b9b0;
+}
+:root[data-palette=ocean] {
+  --studio-bg: #eff4f8;
+  --studio-surface: #fcfdff;
+  --studio-soft: #eaf0f6;
+  --studio-line: #d2deea;
+  --studio-ink: #1d3348;
+  --studio-muted: #506477;
+  --studio-accent: #1a5587;
+  --studio-selected: #d9eafa;
+}
+:root[data-theme=dark][data-palette=ocean] {
+  --studio-bg: #151e28;
+  --studio-surface: #202c38;
+  --studio-soft: #293745;
+  --studio-line: #3a4c5d;
+  --studio-ink: #e8f0f6;
+  --studio-muted: #acbdcc;
+  --studio-accent: #a7d4fc;
+  --studio-selected: #27435a;
+}
+:root[data-palette=plum] {
+  --studio-bg: #f5f1f5;
+  --studio-surface: #fffcff;
+  --studio-soft: #f2eaf1;
+  --studio-line: #e2d5e2;
+  --studio-ink: #392a3c;
+  --studio-muted: #6d5a6d;
+  --studio-accent: #794371;
+  --studio-selected: #f2deed;
+}
+:root[data-theme=dark][data-palette=plum] {
+  --studio-bg: #201a22;
+  --studio-surface: #2b232e;
+  --studio-soft: #352b38;
+  --studio-line: #4c3e50;
+  --studio-ink: #f2eaf2;
+  --studio-muted: #c1afc0;
+  --studio-accent: #ecb5dc;
+  --studio-selected: #503449;
+}
+:root[data-typeface=system] {
+  --shell-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif;
+}
+:root[data-typeface=book] {
+  --shell-font: Georgia, 'Songti TC', 'Noto Serif TC', serif;
+}
+:root[data-typeface=mono] {
+  --shell-font: ui-monospace, Menlo, Consolas, 'PingFang TC', monospace;
+}
+:root[data-typeface] #app,
+:root[data-typeface] :is(#settings-dialog, #quick-tour, .document-dialog, .document-menu) {
+  font-family: var(--shell-font);
+}
+/* The authored timeline keeps its metrics when the surrounding controls change typeface. */
+#gantt, .timeline-date-dock {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif;
+}
+:root[data-palette] { accent-color: var(--studio-accent); }
+:root[data-palette] #settings-dialog input[type=checkbox] { accent-color: var(--studio-accent); }
+:root[data-palette] :is(#document-menu,#quick-tour) {
+  color: var(--studio-ink);
+  background: var(--studio-surface);
+  border-color: var(--studio-line);
+}
+:root[data-palette] :is(.document-dialog, .document-menu, #quick-tour) :is(button, input) {
+  background: var(--studio-soft);
+  border-color: var(--studio-line);
+  color: var(--studio-ink);
+}
+:root[data-palette] #quick-tour :is(.tour-header, .tour-footer) { border-color: var(--studio-line); }
+:root[data-palette] #quick-tour .tour-preview { background: var(--studio-soft); }
+:root[data-palette] #quick-tour .tour-progress span { background: var(--studio-line); }
+:root[data-palette] #quick-tour .tour-progress .is-current { background: var(--studio-accent); }
+:root[data-palette] #quick-tour :is(.tour-timeline, .tour-chip) { color: var(--studio-accent); }
+:root[data-palette] #quick-tour .tour-chip {
+  background: var(--studio-surface);
+  border-color: var(--studio-line);
+}
+:root[data-palette] #quick-tour :is(.tour-bar, .tour-primary) {
+  background: var(--studio-accent);
+  color: var(--studio-surface);
+  border-color: var(--studio-accent);
+}
+:root[data-palette] #document-menu button:is(:hover,:focus-visible) {
+  color: var(--studio-accent);
+  background: var(--studio-selected);
+}
+:root[data-canvas-surface=dots] {
+  --surround-pattern: radial-gradient(circle, var(--surround-ink) 0.85px, transparent 1px);
+  --surround-step: 14px;
+}
+:root[data-canvas-surface=grid] {
+  --surround-pattern: linear-gradient(to right, var(--surround-ink) 1px, transparent 1px),
+                      linear-gradient(to bottom, var(--surround-ink) 1px, transparent 1px);
+  --surround-step: 20px;
+}
+:root[data-canvas-surface] #app :is(.picture-viewport, .timeline-shell:not(.export-capture) .timeline-viewport) {
+  background-color: var(--studio-bg);
+  background-image: var(--surround-pattern, none);
+  background-size: var(--surround-step, auto) var(--surround-step, auto);
+}
+#settings-dialog label[for=pref-palette]::before {
+  content: '';
+  display: inline-block;
+  width: .75em;
+  height: .75em;
+  border-radius: 50%;
+  margin-inline-end: .45em;
+  background: var(--studio-accent);
+}
+@media (max-width: 600px) {
+  #settings-dialog .settings-body {
+    grid-template: auto minmax(0, 1fr) / minmax(0, 1fr);
+  }
+  #settings-dialog .settings-categories {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 6px;
+    border: 0;
+    border-bottom: 1px solid var(--studio-line);
+  }
+  #settings-dialog .settings-categories button { flex: none; padding: 6px 9px; }
+  #settings-dialog .settings-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) 28px; }
+}

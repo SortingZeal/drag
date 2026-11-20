@@ -1,0 +1,34 @@
+/* Date navigation occupies its own row above the scrolling task canvas. */
+.timeline-shell{display:grid;grid-template-rows:var(--timeline-header-height,85px) minmax(0,1fr);min-width:0;min-height:0;overflow:hidden;position:relative;isolation:isolate;contain:paint;background:white}
+.timeline-date-dock{min-width:0;overflow:hidden;position:relative;padding:0 22px;background:var(--g-header-background,#fff);border-bottom:1px solid var(--g-row-border-color,#c7c7c7)}
+.timeline-date-dock .timeline-date-track{height:100%;width:max-content;min-width:100%;overflow:visible;border-radius:0;will-change:transform}
+.timeline-date-dock .grid-header{position:relative;top:0;left:0;z-index:auto;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;background:var(--g-header-background,#fff)}
+.timeline-date-dock .grid-header *{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
+.preview.timeline-viewport{overflow-x:hidden;overflow-y:auto;isolation:isolate;contain:paint;padding:0 22px 18px}
+.timeline-viewport #gantt{position:relative;overflow:hidden}
+.timeline-viewport #gantt>.gantt-container{position:absolute;top:calc(-1 * var(--timeline-header-height));left:0;min-height:0}
+.timeline-viewport .gantt-container .current-highlight{z-index:1}
+.timeline-date-dock .current-ball-highlight{z-index:1}
+.timeline-shell.is-panning-dates,.timeline-shell.is-panning-dates *{cursor:grabbing!important}
+
+/* Labels keep their contrast across the filled and unfilled parts of the track. */
+.bar-tracking-layer ~ .bar-label:not(.big) {
+  paint-order: stroke fill;
+  stroke: var(--progress-label-halo);
+  stroke-opacity: .8;
+  stroke-width: 2px;
+  stroke-linejoin: round;
+}
+.bar-status-text {
+  font-family: inherit;
+  letter-spacing: .1px;
+}
+@keyframes timeline-progress-flow {
+  from { transform: translateX(-16px); }
+  to { transform: translateX(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-reduce-motion=true]) .timeline-shell:not(.export-capture) .bar-progress-motion {
+    animation: timeline-progress-flow 1.8s linear infinite;
+  }
+}

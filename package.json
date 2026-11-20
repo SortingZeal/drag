@@ -1,0 +1,33 @@
+{
+  "name": "drag-roadmap",
+  "version": "5.26.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:unit": "node --test tests/model.test.js tests/align-start.test.js tests/protocol.test.cjs tests/preferences.test.js tests/backup-store.test.cjs tests/publication.test.js tests/serve.test.js tests/document-filename.test.js",
+    "test:browser": "playwright test",
+    "test": "npm run test:unit && npm run test:browser",
+    "check": "node --check src/main.js && node --check src/i18n.js && node --check src/timeline.js && node --check src/model.js && node --check src/align-start.js && node --check src/export.js && node --check src/gif.js && node --check src/simple.js && node --check desktop/main.cjs && node --check desktop/i18n.cjs && node --check desktop/protocol.cjs && node --check scripts/package-desktop.mjs && node --check src/picture-viewport.js && node --check src/sidebar-panel.js && node --check src/preferences.js && node --check src/settings.js && node --check src/backups.js && node --check desktop/preload.cjs && node --check desktop/storage.cjs && node --check src/quick-tour.js && node --check src/documents.js && node --check src/task-outline.js && node --check src/picture-tool-dock.js && node --check src/workspace-header.js",
+    "desktop": "electron .",
+    "desktop:install": "install-electron",
+    "package:desktop": "npm run build && node scripts/package-desktop.mjs",
+    "test:desktop": "node --test tests/desktop.test.js",
+    "test:publish": "node --test tests/publication.test.js"
+  },
+  "dependencies": {
+    "frappe-gantt": "1.2.2"
+  },
+  "devDependencies": {
+    "@electron/packager": "20.3.0",
+    "@playwright/test": "1.62.1",
+    "electron": "45.0.0",
+    "vite": "6.4.5"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "main": "desktop/main.cjs"
+}

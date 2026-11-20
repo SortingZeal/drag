@@ -1,0 +1,16 @@
+main{position:relative}
+.project-sidebar .aside-title{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.project-sidebar .aside-title button{cursor:pointer;touch-action:manipulation}
+.project-sidebar .sidebar-heading{min-width:0;flex:1}
+.project-sidebar [data-sidebar-action]{display:none}
+.sidebar-resizer{position:absolute;top:0;bottom:0;width:8px;z-index:6;cursor:col-resize;touch-action:none;user-select:none;outline:none}
+.sidebar-resizer:before{content:'';position:absolute;top:0;bottom:0;left:3px;width:2px;background:transparent}
+.sidebar-resizer:hover:before,.sidebar-resizer:focus-visible:before{background:#3378df}
+main.sidebar-floating>.project-sidebar{position:absolute;grid-area:auto;z-index:5;min-height:0;border:1px solid #b9c9de;border-radius:10px;box-shadow:0 8px 30px #172a4533;padding-bottom:20px}
+.project-sidebar.is-floating .aside-title{flex-wrap:wrap;border-radius:9px 9px 0 0;white-space:normal}
+.project-sidebar.is-floating .sidebar-heading{flex-basis:100%;font-weight:700;line-height:1.5}
+.project-sidebar.is-floating [data-sidebar-action]{display:inline-block}
+.sidebar-corner-resizer{position:fixed;z-index:6;width:18px;height:18px;cursor:nwse-resize;touch-action:none;user-select:none;border-radius:0 0 6px 0;background:linear-gradient(135deg,transparent 45%,#7c94b3 46%,#7c94b3 52%,transparent 53%,transparent 64%,#7c94b3 65%,#7c94b3 71%,transparent 72%);outline:none}
+.sidebar-corner-resizer:focus-visible{box-shadow:0 0 0 2px #3378df;background-color:#eaf2ff}
+main.is-adjusting-sidebar{user-select:none;-webkit-user-select:none}
+main.is-adjusting-sidebar .aside-title{cursor:grabbing}

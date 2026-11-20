@@ -1,0 +1,42 @@
+#app .picture-workspace .picture-tools {
+  inset: auto; max-width: calc(100% - 8px); width: max-content;
+  gap: 2px; padding: 3px; border-radius: 9px;
+  opacity: 1; transition: opacity 220ms ease;
+}
+#app .picture-workspace .picture-tools.is-idle {opacity:.44}
+#app .picture-workspace .picture-tools:is(.is-moving,:has(:focus-visible),:has(:popover-open)) {opacity:1}
+#app .picture-workspace .picture-tools button:not([data-picture-zoom-level]) {
+  flex: 0 0 auto; min-width: 26px; min-height: 28px; height: 28px; padding: 2px 4px;
+}
+#app .picture-workspace .picture-tools button.icon-button {width:26px}
+#app .picture-workspace .picture-tools button.picture-tool-grip {
+  width:18px; min-width:18px; display:grid; place-items:center; padding:0; cursor:grab; touch-action:none;
+}
+#app .picture-workspace .picture-tools.is-moving .picture-tool-grip {cursor:grabbing}
+#app .picture-workspace .picture-tools :is(.picture-view-controls,.picture-zoom-controls) {gap:1px}
+#app .picture-workspace .picture-tools output {font-size:11px;width:43px;min-width:43px}
+#app .picture-workspace .picture-tools input[type=range] {
+  appearance:none; width:clamp(48px,6vw,64px); min-width:0; padding:0; background:transparent;
+}
+.picture-tools input[type=range]::-webkit-slider-runnable-track {
+  height:4px; border-radius:2px; background:var(--studio-line);
+}
+.picture-tools input[type=range]::-webkit-slider-thumb {
+  appearance:none; width:14px; height:14px; margin-top:-5px;
+  border:0; border-radius:50%; background:var(--studio-accent);
+}
+.picture-tools input[type=range]::-moz-range-track {
+  height:4px; border-radius:2px; background:var(--studio-line);
+}
+.picture-tools input[type=range]::-moz-range-thumb {
+  width:14px; height:14px; border:0; border-radius:50%; background:var(--studio-accent);
+}
+@media(forced-colors:active) {
+  #app .picture-workspace .picture-tools input[type=range] {appearance:auto}
+  .picture-tools input[type=range]::-webkit-slider-thumb {appearance:auto}
+}
+@media(pointer:coarse) {
+  #app .picture-workspace .picture-tools button:not([data-picture-zoom-level]) {min-width:29px;min-height:34px;height:34px}
+}
+@media(prefers-reduced-motion:reduce) {#app .picture-workspace .picture-tools {transition:none}}
+:root[data-reduce-motion="true"] #app .picture-workspace .picture-tools {transition:none}

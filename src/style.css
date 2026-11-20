@@ -1,0 +1,109 @@
+:root{font-family:Inter,"Noto Sans TC",system-ui,sans-serif;color:#172a45;background:#eef2f8}*{box-sizing:border-box}body{margin:0}button,select,input{font:inherit}button{border:1px solid #cbd5e1;background:white;color:#23405e;border-radius:7px;padding:7px 11px;cursor:pointer}button:hover{background:#eaf2ff}button.danger{color:#b91c1c}#app{height:100dvh;display:flex;flex-direction:column}header{height:65px;display:flex;justify-content:space-between;align-items:center;background:white;border-bottom:1px solid #dbe3ed;padding:10px 20px;gap:10px}header nav{display:flex;gap:6px;flex-wrap:wrap}.brand{display:flex;align-items:baseline;gap:12px;white-space:nowrap}.brand b{font-size:30px;letter-spacing:-2px;color:#194ba3}.brand span{font-weight:700}.toolbar{display:flex;gap:9px;align-items:center;padding:9px 18px;background:#f8faff;border-bottom:1px solid #dbe3ed;flex-wrap:wrap}.tabs button{background:#2256b8;color:white;border-color:#2256b8}main{flex:1;display:grid;grid-template-columns:var(--sidebar-width,224px) minmax(0,1fr);position:relative;min-height:0;overflow:hidden}.preview{overflow:auto;background:white;position:relative;padding:18px 22px}.preview #gantt{min-width:100%;width:max-content}.preview .gantt-container{overflow:visible!important}.split{cursor:row-resize;background:#c9d5e4;position:relative}.split:after{content:'•••';position:absolute;left:50%;top:-8px;color:#718096;font-size:15px}.bottom{min-height:0;background:white}aside{overflow:auto;border-right:1px solid #d9e1ee}.aside-title{position:sticky;top:0;background:#f4f7fc;display:flex;justify-content:space-between;align-items:center;padding:12px;font-weight:700;border-bottom:1px solid #e1e8f2;z-index:1}.tree-item{display:flex;gap:8px;align-items:center;padding:9px 10px;cursor:pointer;border-bottom:1px solid #f1f4f8;font-size:14px}.tree-item.phase{padding-left:32px}.tree-item:hover{background:#edf4ff}.tree-item.selected{background:#dceafe;color:#174d9b}.tree-item.drop,.project.drop{outline:2px dashed #3378df}.drag-handle{color:#94a3b8;cursor:grab}.tree-icon{font-size:17px}.count{margin-left:auto;color:#8da0b8}article{padding:18px 24px;overflow:auto}.editor-title{display:flex;align-items:center;justify-content:space-between;gap:10px}.editor-title h2{font-size:20px;margin:0}.editor-title>div{display:flex;gap:7px}.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:22px}.form label{display:flex;flex-direction:column;gap:7px;font-size:13px;color:#42536c;font-weight:600}.field{display:flex;align-items:center;gap:8px}.field input,.form>label>input:not([type=checkbox]){width:100%;padding:9px;border:1px solid #cad6e4;border-radius:7px;background:white}.empty{padding:45px;color:#64748b}@media(max-width:900px){header{height:auto;align-items:flex-start;flex-direction:column}header nav{max-width:100%}}
+
+/* Timeline interactions */
+.preview .bar-wrapper:not(.drag-anchor) .bar{cursor:grab;transition:filter .12s}
+.preview .bar-wrapper:not(.drag-anchor):hover .bar{filter:brightness(1.08) drop-shadow(0 2px 4px #33415555)}
+.preview .bar-wrapper .handle{cursor:ew-resize;stroke-width:4;stroke:rgba(255,255,255,.85)}
+.preview .drag-anchor{opacity:0!important;pointer-events:none!important}
+.preview .drag-anchor .bar,.preview .drag-anchor .bar-label{opacity:0!important}
+.preview .gantt-container{min-height:220px}
+.toolbar{gap:6px}.toolbar button{padding:6px 8px}
+
+/* Resize handles and drag targets */
+.snap-control{display:flex;align-items:center;gap:5px;font-size:12px;color:#52667f}.snap-control select{padding:6px;border:1px solid #cbd5e1;border-radius:7px;background:white}
+.date-nudge{grid-column:1/-1;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px;background:#f3f7fd;border-radius:9px}.date-nudge>div{display:flex;gap:7px;flex-wrap:wrap}.date-nudge b{font-size:13px}
+.preview .bar-wrapper .handle{pointer-events:all;stroke-width:7;stroke:rgba(255,255,255,.9)}
+.preview .bar-wrapper:not(.drag-anchor) .bar:active{cursor:grabbing}
+
+/* Keep browser gestures from competing with the calendar pointer adapter. */
+.preview .bar-wrapper{touch-action:none;user-select:none}
+.preview #gantt.is-dragging,.preview #gantt.is-dragging .bar{cursor:grabbing}
+
+/* Presentation preview shares the same model and leaves the editor intact. */
+[hidden]{display:none!important}
+.timeline-controls{display:contents}
+.tabs{display:flex;gap:5px}.tabs button:not(.active){background:white;color:#23405e;border-color:#cbd5e1}
+.report-controls{display:flex;gap:12px;flex-wrap:wrap;align-items:end;padding:14px;background:#f8faff;border:1px solid #dbe3ed;border-radius:8px}
+.report-controls label{display:flex;flex-direction:column;gap:5px;color:#42536c;font-size:12px}
+.report-controls label:first-child{flex:1;min-width:230px}
+.report-controls input,.report-controls select{border:1px solid #cad6e4;border-radius:6px;background:white;padding:8px;min-width:0}header{position:relative;z-index:3}
+.align-start,.date-line{position:relative;align-self:center}.align-start summary,.date-line summary{cursor:pointer;list-style:none;padding:8px 11px;border:1px solid #cad6e4;border-radius:6px;background:#fff;color:#23405e;font-size:13px;white-space:nowrap}.align-start summary::-webkit-details-marker,.date-line summary::-webkit-details-marker{display:none}.align-start summary::after,.date-line summary::after{content:'⌄';margin-left:8px}.align-start[open] summary::after,.date-line[open] summary::after{content:'⌃'}.align-start-fields{position:absolute;z-index:4;right:0;top:calc(100% + 5px);display:flex;align-items:end;gap:8px;padding:10px;border:1px solid #cad6e4;border-radius:8px;background:#fff;box-shadow:0 8px 24px #172a4525;white-space:nowrap}.align-start button,.date-line button{height:37px;white-space:nowrap}
+.report-message{color:#66798d;font-size:12px;line-height:1.6}
+.infographic-preview{background:white;border:1px solid #e1e8f2;max-width:1600px;margin:0 auto}
+.infographic-preview>svg{display:block;width:100%;height:auto}
+
+/* Explain unavailable actions without changing the existing editor layout. */
+button:disabled,button:disabled:hover{opacity:.45;cursor:not-allowed;background:#f1f5f9;color:#64748b}
+
+
+.icon-field{display:flex;flex-direction:column;gap:7px;grid-column:1/-1;max-width:470px}
+.icon-field>label{font-size:13px;color:#42536c;font-weight:600}
+.icon-input{display:flex;align-items:center;gap:10px}
+.icon-preview{display:grid;place-items:center;flex:0 0 44px;min-height:42px;font-size:25px;background:#f4f7fc;border:1px solid #dbe3ed;border-radius:7px;color:#42536c}
+.icon-preview:empty{display:none}
+.icon-input input{width:100%;padding:9px;border:1px solid #cad6e4;border-radius:7px;min-width:0}
+.icon-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(38px,1fr));gap:6px}
+.icon-options button{min-height:38px;padding:5px;font-size:21px}
+.icon-options button:first-child{font-size:13px}
+.icon-options button[aria-pressed=true]{background:#dceafe;border-color:#3378df;box-shadow:inset 0 0 0 1px #3378df}
+
+/* Keep content changes inside the existing split panels. */
+header,.toolbar{flex-shrink:0}
+.toolbar>*,.snap-control{flex-shrink:0}
+main,.preview,.bottom,aside,#editor{min-width:0}
+.preview{min-height:0;isolation:isolate;contain:paint;z-index:0}
+.split{z-index:2}
+.bottom{overflow:hidden}
+.editor-title,.editor-title>div{flex-wrap:wrap}
+
+
+/* The project tree occupies a compact, full-height left rail. */
+main>.project-sidebar{grid-column:1;grid-row:1/-1;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;background:white}
+main>.preview,main>.timeline-shell{grid-column:2;grid-row:1}
+main>.split{grid-column:2;grid-row:2}
+main>.bottom{grid-column:2;grid-row:3}
+.bottom>#editor{height:100%;min-height:0}
+.project-sidebar .aside-title{padding:10px 8px;gap:6px;font-size:13px;white-space:nowrap}
+.project-sidebar .aside-title button{padding:5px 7px;font-size:12px;flex-shrink:0}
+.project-sidebar .tree-item{min-height:30px;padding:6px 8px;gap:5px;font-size:13px;line-height:1.35}
+.project-sidebar .tree-item.phase{padding-left:22px}
+.project-sidebar .tree-label{min-width:0;overflow-wrap:anywhere;white-space:normal}
+.project-sidebar .tree-icon,.project-sidebar .phase-icon{flex-shrink:0;font-size:14px}
+.project-sidebar .drag-handle{flex:0 0 10px}
+.project-sidebar .count{flex-shrink:0;font-size:12px}
+
+/* Compact inspector: keep common fields readable and reveal the icon palette on demand. */
+#editor{padding:18px 24px 28px;background:#fff;scrollbar-gutter:stable}
+.editor-title{position:sticky;top:-18px;z-index:1;margin:-18px -24px 0;padding:16px 24px 12px;background:#fff;border-bottom:1px solid #e8edf5}
+.form{grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:14px 18px;margin-top:18px;align-items:start}
+.form label{line-height:1.35}.field input,.form>label>input:not([type=checkbox]){min-height:40px}
+.icon-field{grid-column:auto;max-width:none;min-width:0}.icon-input{gap:8px}.icon-preview{flex-basis:40px;min-height:40px;font-size:22px}
+.icon-picker{position:relative}.icon-picker summary{display:inline-flex;align-items:center;min-height:34px;padding:5px 10px;border:1px solid #cbd5e1;border-radius:7px;background:#fff;color:#23405e;cursor:pointer;font-size:13px;list-style:none}.icon-picker summary::-webkit-details-marker{display:none}.icon-picker summary:after{content:' ▾';margin-left:5px}.icon-picker[open] summary:after{content:' ▴'}
+.icon-picker .icon-options{margin-top:8px;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));max-width:440px}
+.date-nudge{padding:8px;gap:8px}.toolbar{padding:7px 14px;gap:6px}.toolbar button{padding:6px 8px}.tabs{gap:3px}
+@media(max-width:700px){#editor{padding:14px 16px 24px}.editor-title{top:-14px;margin:-14px -16px 0;padding:12px 16px}.form{grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr))}}
+
+.editor-title .editor-selection{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#63758a;font-size:14px}.form label:has(>input[type=checkbox]){flex-direction:row;align-items:center;min-height:40px;gap:8px}.form label:has(>input[type=checkbox]) input{order:-1;accent-color:#2256b8}
+
+.startup-error{justify-content:center;align-items:center;padding:24px}
+.startup-error>section{width:min(480px,100%);padding:28px;border:1px solid #d9e1ee;border-radius:14px;background:#fff;box-shadow:0 12px 40px #172a4522}
+.startup-error h1{margin:0 0 12px;font-size:21px}.startup-error p{margin:0 0 22px;line-height:1.7}.startup-error button{min-height:44px}
+
+@media(max-width:700px){
+ #app main{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(130px,25%) minmax(120px,1fr) 0 minmax(190px,42%)!important}
+ #app main[data-inspector=closed]{grid-template-rows:minmax(130px,30%) minmax(160px,1fr) 0 0!important}
+ #app main>.project-sidebar{grid-column:1;grid-row:1;min-width:0;border-right:0;border-bottom:1px solid #d9e1ee}
+ #app main>.preview,#app main>.timeline-shell{grid-column:1;grid-row:2;min-width:0;min-height:0}
+ #app main>.split,#app main>.sidebar-resizer,#app .sidebar-corner-resizer{display:none!important}
+ #app main>.bottom{grid-column:1;grid-row:4;min-width:0;border-top:1px solid #d9e1ee}
+ #app .project-sidebar .sidebar-top{position:static}
+ #app .project-sidebar .tree-item{min-height:44px}
+ #app .project-sidebar .tree-label{flex:1}
+ #app .project-sidebar .count{margin-left:0}
+ #app .mobile-sort{display:flex;gap:2px;margin-left:auto;flex:none}
+ #app .mobile-sort button{min-width:40px;min-height:40px;padding:0 7px;font-size:18px}
+ #app .mobile-sort-hint{margin:8px 12px;color:var(--chrome-subtle,#52667f);font-size:12px;line-height:1.5}
+ #app .project-sidebar .aside-title{cursor:default;touch-action:pan-y}
+ #app .project-sidebar .aside-title button{min-height:40px}
+ #app #editor .editor-section .form{grid-template-columns:minmax(0,1fr)}
+}

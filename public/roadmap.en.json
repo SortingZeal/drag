@@ -1,0 +1,182 @@
+{
+  "title": "Project Roadmap Template",
+  "projects": [
+    {
+      "id": "example-project-1",
+      "name": "Website Planning",
+      "color": "#2563eb",
+      "icon": "★",
+      "phases": [
+        {
+          "id": "example-task-1-1",
+          "label": "Gather Requirements",
+          "start": "2027-01-04",
+          "end": "2027-02-07",
+          "locks": {}
+        },
+        {
+          "id": "example-task-1-2",
+          "label": "Layout Design",
+          "start": "2027-02-15",
+          "end": "2027-03-21",
+          "locks": {},
+          "milestone": "Milestone Review"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-2",
+      "name": "Feature Development",
+      "color": "#16a34a",
+      "icon": "⚙",
+      "phases": [
+        {
+          "id": "example-task-2-1",
+          "label": "Implement Workflow",
+          "start": "2027-01-11",
+          "end": "2027-05-11",
+          "locks": {},
+          "milestone": "Milestone Review"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-3",
+      "name": "Quality Assurance",
+      "color": "#9333ea",
+      "icon": "▣",
+      "phases": [
+        {
+          "id": "example-task-3-1",
+          "label": "Integration Testing",
+          "start": "2027-01-18",
+          "end": "2027-05-18",
+          "locks": {},
+          "milestone": "Milestone Review"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-4",
+      "name": "Product Trial",
+      "color": "#ea580c",
+      "icon": "⬡",
+      "phases": [
+        {
+          "id": "example-task-4-1",
+          "label": "Build Prototype",
+          "start": "2027-01-25",
+          "end": "2027-02-28",
+          "locks": {}
+        },
+        {
+          "id": "example-task-4-2",
+          "label": "Collect Feedback",
+          "start": "2027-03-08",
+          "end": "2027-04-11",
+          "locks": {}
+        },
+        {
+          "id": "example-task-4-3",
+          "label": "Revise Design",
+          "start": "2027-04-19",
+          "end": "2027-05-23",
+          "locks": {},
+          "milestone": "Milestone Review"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-5",
+      "name": "Content Production",
+      "color": "#0891b2",
+      "icon": "●",
+      "phases": [
+        {
+          "id": "example-task-5-1",
+          "label": "Gather Assets",
+          "start": "2027-02-01",
+          "end": "2027-03-07",
+          "locks": {}
+        },
+        {
+          "id": "example-task-5-2",
+          "label": "Arrange Content",
+          "start": "2027-03-15",
+          "end": "2027-04-18",
+          "locks": {}
+        },
+        {
+          "id": "example-task-5-3",
+          "label": "Review Content",
+          "start": "2027-04-26",
+          "end": "2027-05-30",
+          "locks": {},
+          "milestone": "Milestone Review"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-6",
+      "name": "Documentation",
+      "color": "#db2777",
+      "icon": "⌘",
+      "phases": [
+        {
+          "id": "example-task-6-1",
+          "label": "Draft Documentation",
+          "start": "2027-02-08",
+          "end": "2027-03-14",
+          "locks": {}
+        },
+        {
+          "id": "example-task-6-2",
+          "label": "Proofread Documentation",
+          "start": "2027-03-22",
+          "end": "2027-04-25",
+          "locks": {},
+          "milestone": "Milestone Review"
+        }
+      ],
+      "locks": {}
+    },
+    {
+      "id": "example-project-7",
+      "name": "Release Preparation",
+      "color": "#ca8a04",
+      "icon": "◎",
+      "phases": [
+        {
+          "id": "example-task-7-1",
+          "label": "Prepare Release",
+          "start": "2027-02-15",
+          "end": "2027-03-21",
+          "locks": {}
+        },
+        {
+          "id": "example-task-7-2",
+          "label": "Publish",
+          "start": "2027-03-29",
+          "end": "2027-05-02",
+          "locks": {}
+        },
+        {
+          "id": "example-task-7-3",
+          "label": "Follow Up",
+          "start": "2028-01-03",
+          "end": "2028-06-30",
+          "locks": {},
+          "milestone": "Milestone Review",
+          "light": true,
+          "open_end": true
+        }
+      ],
+      "locks": {}
+    }
+  ]
+}

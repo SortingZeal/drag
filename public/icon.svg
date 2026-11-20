@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 64 64">
+  <title>drag</title>
+  <rect x="3" y="3" width="58" height="58" rx="14" fill="#123d35"/>
+  <path d="M14 18h25v7H14z" fill="#f1f7eb"/>
+  <path d="M22 29h28v7H22z" fill="#9ed9b8"/>
+  <path d="M14 40h15v7H14z" fill="#65b29c"/>
+  <path d="m40 38 6 5.5-6 5.5-6-5.5z" fill="#e9bd72"/>
+</svg>
