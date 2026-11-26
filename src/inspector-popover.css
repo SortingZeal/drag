@@ -1,0 +1,45 @@
+#app main[data-inspector][data-inspector-anchor=chart] > .bottom,
+#app main[data-inspector][data-inspector-anchor=chart] > .split {
+  position: absolute;
+  grid-area: auto;
+  top: var(--chart-inspector-y);
+  height: var(--chart-inspector-height);
+}
+
+#app main[data-inspector][data-inspector-anchor=chart] > .bottom {
+  inset-inline-start: var(--chart-inspector-x);
+  width: var(--chart-inspector-width);
+  max-width: none;
+  z-index: 6;
+  container-type: size;
+  border: 1px solid var(--studio-line);
+  border-radius: 12px;
+  background: var(--studio-surface);
+  box-shadow: var(--studio-shadow);
+}
+
+#app main[data-inspector][data-inspector-anchor=chart] > .split {
+  inset-inline-start: calc(var(--chart-inspector-x) + var(--chart-inspector-width) - 3px);
+  width: 5px;
+  z-index: 7;
+}
+
+#app main[data-inspector-anchor=chart][data-inspector-resize-left] > .split {
+  inset-inline-start: calc(var(--chart-inspector-x) - 2px);
+}
+
+#app main[data-inspector-anchor=chart] #editor {
+  overscroll-behavior: contain;
+}
+
+#app main[data-inspector-occluded] > :is(.bottom, .split) {
+  visibility: hidden;
+}
+
+/* A sticky title must leave room to use the form above a software keyboard. */
+@container (max-height: 260px) {
+  #app main[data-inspector-anchor=chart] .editor-title {
+    position: relative;
+    top: auto;
+  }
+}

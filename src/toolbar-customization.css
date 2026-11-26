@@ -1,0 +1,51 @@
+/* Spacing items belong to the toolbar and move with its controls. */
+#app[data-ui-size] .workspace-header [data-toolbar-layout]:has(> [data-toolbar-spacing="space"]) { flex-grow:1 }
+[data-toolbar-layout] > .toolbar-spacing { display:block; align-self:center; height:19px; pointer-events:none }
+[data-toolbar-layout] > [data-toolbar-spacing="separator"] { flex:0 1 5px; min-width:1px; background:linear-gradient(to right,transparent calc(50% - .5px),var(--studio-line) calc(50% - .5px),var(--studio-line) calc(50% + .5px),transparent calc(50% + .5px)) }
+[data-toolbar-layout] > [data-toolbar-spacing="space"] { flex:1 1 16px; min-width:4px }
+[data-toolbar-editing] > [data-toolbar-spacing] { min-width:10px }
+[data-toolbar-editing] > [data-toolbar-spacing="space"] { border:1px dashed var(--studio-muted); border-radius:4px }
+[data-toolbar-editing] [role="menu"],[data-toolbar-editing] .view-settings-panel { visibility:hidden }
+@keyframes toolbar-wiggle { from {transform:rotate(-1.7deg)} to {transform:rotate(1.7deg)} }
+@media (prefers-reduced-motion:no-preference) {
+  :root:not([data-reduce-motion="true"]) [data-toolbar-editing] > [data-toolbar-key] { animation:toolbar-wiggle .23s ease-in-out infinite alternate; transform-origin:50% 65% }
+  :root:not([data-reduce-motion="true"]) [data-toolbar-editing] > [data-toolbar-key]:nth-child(even) { animation-direction:alternate-reverse }
+}
+
+#app .toolbar-editor {
+  position:fixed; inset:0; width:100%; height:100%; max-width:none; max-height:none;
+  margin:0; padding:0; border:0; overflow:hidden; background:transparent; color:var(--studio-ink);
+  font-family:inherit; font-size:calc(13px * var(--ui-scale,1));
+}
+#app .toolbar-editor::backdrop { background:color-mix(in srgb,var(--studio-ink) 9%, transparent) }
+#app .toolbar-edit-panel {
+  position:absolute; top:var(--toolbar-edit-top,52px); right:10px; width:min(340px,calc(100% - 20px));
+  max-height:calc(100% - var(--toolbar-edit-top,52px) - 10px); overflow:auto; box-sizing:border-box;
+  border:1px solid var(--studio-line); border-radius:12px; padding:14px; background:var(--studio-surface); box-shadow:var(--studio-shadow);
+}
+#app .toolbar-edit-panel h2 { margin:0 0 4px; font-size:1.05em; font-weight:700; color:var(--studio-ink) }
+#app .toolbar-edit-panel p { margin:0 0 12px; font-size:.92em; line-height:1.45; color:var(--studio-muted) }
+#app .toolbar-edit-selection { display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:33px }
+#app .toolbar-edit-selection > span { overflow-wrap:anywhere; font-weight:650 }
+#app .toolbar-move-buttons,#app .toolbar-add-buttons,#app .toolbar-edit-footer { display:flex; align-items:center; gap:6px }
+#app .toolbar-add-buttons { margin:9px 0 12px }
+#app .toolbar-edit-footer { border-top:1px solid var(--studio-line); padding-top:10px }
+#app .toolbar-edit-panel button { appearance:none; margin:0; padding:5px 8px; border:1px solid var(--studio-line); border-radius:6px; background:var(--studio-surface); color:var(--studio-ink); font:inherit; cursor:pointer }
+#app .toolbar-move-buttons button { min-width:27px; padding:3px; line-height:1.3; font-size:1.1em }
+#app .toolbar-edit-panel button:disabled { opacity:.38; cursor:default }
+#app .toolbar-edit-panel button:not(:disabled):hover { background:var(--studio-selected) }
+#app .toolbar-edit-panel button[data-toolbar-command="default"] { margin-right:auto; color:var(--studio-muted) }
+#app .toolbar-edit-panel button[data-toolbar-command="save"] { border-color:var(--studio-accent); background:var(--studio-accent); color:var(--studio-surface) }
+#app .toolbar-editor button:focus-visible { outline:2px solid var(--studio-accent); outline-offset:1px }
+#app .toolbar-grip {
+  position:absolute; display:block; box-sizing:border-box; min-width:0; min-height:0; margin:0; padding:0;
+  border:1px dashed var(--studio-muted); border-radius:6px; background:transparent; cursor:grab; touch-action:none;
+}
+#app .toolbar-grip[hidden] { display:none }
+#app .toolbar-grip:active { cursor:grabbing }
+#app .toolbar-grip[aria-pressed="true"] { border:2px solid var(--studio-accent); background:color-mix(in srgb,var(--studio-accent) 9%,transparent) }
+#app .toolbar-grip[data-drop]::before {
+  content:''; position:absolute; width:3px; inset-block:-2px; border-radius:2px; background:var(--studio-accent);
+}
+#app .toolbar-grip[data-drop="before"]::before { left:-4px }
+#app .toolbar-grip[data-drop="after"]::before { right:-4px }

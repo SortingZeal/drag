@@ -1,0 +1,109 @@
+/* Canvas Studio experiment: shell styling is isolated from authored chart data. */
+:root {--studio-bg:#f5f5f2;--studio-surface:#fff;--studio-soft:#f3f4f1;--studio-line:#e6e7e2;--studio-ink:#242923;--studio-muted:#73796f;--studio-accent:#32634d;--studio-selected:#e8f0e8;--studio-shadow:0 16px 48px #25352a18; color-scheme:light}
+:root[data-theme=dark] {--studio-bg:#161a18;--studio-surface:#202622;--studio-soft:#262e28;--studio-line:#343e36;--studio-ink:#e8ece5;--studio-muted:#a5afa3;--studio-accent:#b3d2b0;--studio-selected:#354638;--studio-shadow:0 16px 48px #0005; color-scheme:dark}
+:root #app,:root[data-theme=dark] #app {--chrome-surface:var(--studio-surface);--chrome-muted:var(--studio-soft);--chrome-line:var(--studio-line);--chrome-ink:var(--studio-ink);--chrome-subtle:var(--studio-muted);--chrome-accent:var(--studio-accent);--chrome-accent-soft:var(--studio-selected);background:var(--studio-bg);color:var(--studio-ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans TC',sans-serif;-webkit-font-smoothing:antialiased}
+#app header,#app:is([data-ui-size=small],[data-ui-size=large]) header {--header-height:max(40px,calc(28px + 8px * var(--ui-scale) + 2 * var(--row-inset)));height:var(--header-height);min-height:var(--header-height);padding:calc(6px * var(--ui-scale)) 16px;gap:14px;flex-direction:row;align-items:center;box-shadow:none;background:var(--studio-surface)}
+#app .brand b {font-size:calc(19px * var(--ui-scale));font-weight:800;letter-spacing:-1px;color:var(--studio-ink)}
+#app .brand b .brand-dot {font-size:calc(19px * var(--ui-scale));color:var(--studio-accent)}
+.workspace-heading {display:flex;flex:1 1 auto;align-items:center;border-left:1px solid var(--studio-line);padding-left:14px;min-width:0}
+.workspace-eyebrow {font-size:calc(9px * var(--ui-scale));letter-spacing:.1em;color:var(--studio-muted)}
+.workspace-heading strong {display:block;flex:1 1 auto;min-width:0;font-size:calc(12px * var(--ui-scale));font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#app .global-actions>[data-action=global-menu] {width:38px;height:36px;background:var(--studio-surface);border-color:var(--studio-line)}
+#app header .language-toggle {display:grid;place-items:center;flex:none;width:36px;height:36px;min-width:36px;padding:0;border:0;background:transparent;color:var(--studio-muted)}
+#app header .language-toggle .ui-icon {width:18px;height:18px}
+#app .toolbar,#app:is([data-ui-size=small],[data-ui-size=large]) .toolbar {padding:calc(10px * var(--ui-scale)) 18px;min-height:calc(58px * var(--ui-scale));gap:10px;box-shadow:none;background:var(--studio-surface)}
+#app .toolbar .tabs {padding:3px;border:0;background:var(--studio-soft);border-radius:8px}
+#app .toolbar .tabs button {padding:6px 14px;font-size:calc(12px * var(--ui-scale));font-weight:600}
+#app .toolbar .tabs button.active {color:var(--studio-ink);background:var(--studio-surface);box-shadow:0 1px 3px #1c30251c;border-radius:5px}
+#app .toolbar button,#app .toolbar select,#app .toolbar summary {font-size:calc(12px * var(--ui-scale))}
+#app button {border-color:var(--studio-line);background:var(--studio-surface);color:var(--studio-ink)}
+#app button:not(:disabled):hover {background:var(--studio-selected);color:var(--studio-accent)}
+#app button:disabled {background:var(--studio-soft);color:var(--studio-muted)}
+#app button.danger {color:#b34747}
+#app :is(.toolbar,.aside-title,.editor-title,.picture-view-controls) .icon-button {display:inline-grid;place-items:center;flex:none;width:34px;min-width:34px;height:34px;min-height:34px;padding:0;line-height:1}
+#app .icon-button .ui-icon {width:17px;height:17px}
+#app .toolbar [data-action=fit-content] {border:0;background:transparent;color:var(--studio-muted)}
+#app .toolbar [data-action=fit-content][aria-pressed=true] {background:var(--studio-selected);color:var(--studio-accent)}
+#app .timeline-controls {display:flex;align-items:center;gap:8px;min-width:0}
+#app .scale-label {font-size:11px;color:var(--studio-muted);margin-left:12px}
+#app .snap-control select {padding:6px 9px;border:1px solid var(--studio-line);border-radius:6px;background:var(--studio-surface);color:var(--studio-ink)}
+.date-navigation {display:flex;gap:0;margin-left:12px;border:1px solid var(--studio-line);border-radius:7px;overflow:hidden}
+#app .date-navigation button {border:0;border-radius:0;background:transparent;padding:5px 10px}
+#app .date-navigation [data-action=prev],#app .date-navigation [data-action=next] {font-size:20px;line-height:20px}
+.range-options {position:relative;margin-left:6px}
+.range-options summary {cursor:pointer;list-style:none;color:var(--studio-muted);padding:8px;border-radius:6px}
+.range-options summary::-webkit-details-marker {display:none}
+.range-options summary:after {content:'⌄';margin-left:8px}
+.range-options[open] summary {background:var(--studio-soft);color:var(--studio-ink)}
+.range-popover {position:absolute;top:calc(100% + 8px);right:0;z-index:12;width:252px;max-width:calc(100vw - 24px);padding:16px;display:grid;gap:10px;border:1px solid var(--studio-line);border-radius:12px;background:var(--studio-surface);box-shadow:var(--studio-shadow)}
+.range-popover .snap-control {justify-content:space-between;color:var(--studio-ink);padding-bottom:10px;border-bottom:1px solid var(--studio-line)}
+.range-popover>div {display:flex;gap:8px}.range-popover>div button {flex:1}
+.range-caption {font-size:11px;color:var(--studio-muted)}
+#app main>.project-sidebar {background:var(--studio-bg);box-shadow:none;border-color:var(--studio-line)}
+#app .project-sidebar .sidebar-top,#app .project-sidebar .aside-title {background:var(--studio-bg)}
+#app .aside-title button {background:transparent;border:0;color:var(--studio-muted)}
+#app .project-sidebar .aside-title {padding:14px 12px 8px;border:0;font-size:11px;color:var(--studio-muted);font-weight:500}
+#app #tree {padding:0 8px 18px}
+#app .project-sidebar .tree-item {border:0;border-radius:6px;margin-block:2px;font-size:12px;color:var(--studio-ink);padding-block:var(--row-inset)}
+#app .tree-item:not(.phase) {margin-top:calc(var(--group-gap) - 4px)}
+#app .tree-item b {font-weight:650}
+#app .project-sidebar .tree-item:hover {background:var(--studio-soft)}
+#app .project-sidebar .tree-item.selected {background:var(--studio-selected);color:var(--studio-accent);box-shadow:none}
+#app .tree-item .drag-handle {opacity:.35}
+#app .tree-item:hover .drag-handle {opacity:1}
+#app .tree-item .count {font-size:10px;color:var(--studio-muted)}
+#app #editor,#app .editor-title,:root[data-theme=dark] #app :is(#editor,.editor-title) {background:var(--studio-surface);color:var(--studio-ink);border-color:var(--studio-line)}
+#app #editor {padding:20px 18px}
+#app .editor-title {padding:14px 18px;margin:-20px -18px 0;top:-20px;gap:10px}
+#app .editor-title h2 {font-size:11px;color:var(--studio-muted);font-weight:500;letter-spacing:.06em}
+#app .editor-title .editor-selection {color:var(--studio-ink);font-size:16px;font-weight:650;line-height:1.6;overflow-wrap:anywhere}
+#app .editor-title button {font-size:11px;border:0;background:var(--studio-soft);font-weight:500}
+#app .editor-section {border:0;border-bottom:1px solid var(--studio-line);border-radius:0;box-shadow:none;padding-bottom:var(--group-gap)}
+#app .editor-section>summary {background:transparent;font-size:11px;font-weight:600;padding:var(--row-inset) 0;min-height:var(--field-height)}
+#app .editor-section[open]>summary {border:0}
+#app .editor-section .form {padding:0;gap:var(--group-gap) 10px}
+#app .editor-section .form label {font-size:11px;font-weight:400;color:var(--studio-muted)}
+#app .editor-section input:not([type=checkbox]),#app .editor-section .icon-input input {padding:var(--row-inset) 9px;background:var(--studio-soft);color:var(--studio-ink);border:1px solid transparent;border-radius:6px;font-size:12px;font-weight:400}
+#app .project-progress-summary {
+  display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:4px 8px;
+  font-size:calc(12px * var(--ui-scale,1));color:var(--studio-ink)
+}
+#app .project-progress-summary strong {font-variant-numeric:tabular-nums}
+#app .project-progress-summary progress {grid-column:1 / -1;width:100%;height:8px;accent-color:var(--studio-accent)}
+#app .project-progress-summary small {grid-column:1 / -1;font-size:inherit;color:var(--studio-muted)}
+#app .editor-section input:focus {border-color:var(--studio-accent)}
+#app .editor-section .icon-preview {border:0;background:var(--studio-soft)}
+#app .split {background:var(--studio-bg)}
+#app .split:after {content:'';background:var(--studio-line);border-radius:3px}
+#app .picture-tools {border:1px solid var(--studio-line);box-shadow:var(--studio-shadow);border-radius:10px;padding:6px}
+#app header .action-menu {border-radius:12px;padding:7px;box-shadow:var(--studio-shadow)}
+#app header .action-menu button {font-weight:500}
+#app :is(button,input,select,summary):focus-visible {outline:2px solid var(--studio-accent);outline-offset:3px}
+/* A theme-aware timeline preview; export captures the existing neutral chart. */
+:root[data-theme=dark] #app .timeline-shell,:root[data-theme=dark] #app .timeline-viewport {background:var(--studio-bg)}
+:root[data-theme=dark] .timeline-shell:not(.export-capture) :is(#gantt,.timeline-date-dock) {--g-header-background:#202622;--g-row-color:#1d231f;--g-border-color:#29342c;--g-row-border-color:#343e36;--g-tick-color:#242e27;--g-tick-color-thick:#343e36;--g-text-muted:#a5afa3;--g-text-dark:#ecefe8;--g-weekend-highlight-color:#202923}
+@media(min-width:1101px) {
+ #app .editor-title {display:flex;flex-direction:column;align-items:flex-start}
+ #app .editor-title>div {display:flex;gap:5px;flex-wrap:wrap}
+ #app .editor-sections {display:flex;flex-direction:column;gap:4px;margin-top:10px}
+ #app .editor-section {width:100%}
+ #app .editor-section .form {grid-template-columns:minmax(0,1fr)}
+ #app .editor-section .icon-input input {min-width:0}
+ #app .editor-section .date-nudge {padding:8px}
+ #app .editor-section .date-nudge>div {flex-wrap:wrap}
+}
+@media(max-width:1100px) {#app .split:after {height:2px;width:32px;top:2px;left:50%}#app .toolbar {gap:6px}#app .range-options {margin-left:0}#app .scale-label {margin-left:0}}
+@media(max-width:700px) {#app header,#app:is([data-ui-size=small],[data-ui-size=large]) header {padding-inline:14px;gap:16px}.workspace-heading {padding-left:16px}#app .toolbar {padding-inline:10px}#app .toolbar .timeline-controls {flex:1 1 100%;width:100%;max-width:100%;flex-wrap:wrap}.range-popover {right:auto;left:0}}
+@media(max-width:700px) {#app :is(.toolbar,.aside-title,.editor-title,.picture-view-controls) .icon-button {width:40px;min-width:40px;height:40px;min-height:40px}#app .global-actions>[data-action=global-menu] {width:40px;height:40px}}
+@media(max-width:700px) {#app header .language-toggle {width:40px;min-width:40px;height:40px}}
+@media(prefers-reduced-motion:reduce) {#app * {transition:none!important;animation:none!important}}
+:root[data-theme=dark] #app #gantt {background:var(--studio-bg)}
+/* Keep picture surround and dialogs in the same material palette. */
+:root[data-theme] #app .picture-viewport {background:var(--studio-bg)}
+:root[data-theme] #app :is(.picture-tools,.picture-zoom-menu) {background:var(--studio-surface);color:var(--studio-ink);border-color:var(--studio-line)}
+:root[data-theme] #settings-dialog,:root[data-theme] .document-dialog {background:var(--studio-surface);color:var(--studio-ink);border-color:var(--studio-line);box-shadow:var(--studio-shadow)}
+:root[data-theme] #settings-dialog :is(.settings-header,.settings-body,.settings-row,.settings-footer,.settings-categories) {border-color:var(--studio-line)}
+:root[data-theme] #settings-dialog :is(.settings-categories,.settings-footer) {background:var(--studio-bg)}
+:root[data-theme] #settings-dialog :is(input:not([type=checkbox]),select,button) {background:var(--studio-soft);color:var(--studio-ink);border-color:var(--studio-line)}
+:root[data-theme] #settings-dialog .settings-categories button {background:transparent;border-color:transparent;color:var(--studio-muted)}
+:root[data-theme] #settings-dialog .settings-categories button[aria-current=true],:root[data-theme] #settings-dialog .settings-sizes button[aria-pressed=true] {background:var(--studio-selected);color:var(--studio-accent);border-color:var(--studio-accent)}

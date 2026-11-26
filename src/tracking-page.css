@@ -1,0 +1,70 @@
+#app main[data-view=tracking] {display:block;min-height:0;overflow:hidden;background:var(--studio-soft)}
+#app main[data-view=tracking] > :not(#tracking-page) {display:none!important}
+#app #tracking-page {
+  height:100%;width:100%;min-width:0;overflow:auto;color:var(--studio-ink);
+  font-size:calc(13px * var(--ui-scale));background:var(--studio-soft);
+}
+.tracking-inner {max-width:1440px;margin:auto;padding:clamp(6px,calc(2 * var(--group-gap)),4vw)}
+.review-header,.review-header label {display:flex;align-items:center;gap:10px}
+.review-header {justify-content:space-between;gap:16px;margin-bottom:var(--group-gap)}
+#app .review-header h1 {font:inherit;font-size:1.65em;font-weight:720;letter-spacing:-.035em;margin:0}
+.review-header p,.review-header label {color:var(--studio-muted);font-size:.95em}
+.review-header p {margin:4px 0 0;font-variant-numeric:tabular-nums}
+#app #tracking-project-filter {font:inherit;background:var(--studio-surface);border:1px solid var(--studio-line);border-radius:7px;color:var(--studio-ink);padding:5px 8px;max-width:min(32vw,280px);min-height:32px}
+.review-categories {display:flex;flex-wrap:wrap;gap:var(--control-gap);margin-bottom:var(--group-gap)}
+#app .review-categories button {display:inline-flex;align-items:center;gap:9px;border:1px solid var(--studio-line);border-radius:7px;background:var(--studio-surface);color:var(--studio-ink);padding:6px 10px;font-size:1em}
+#app .review-categories button b {font-size:.9em;font-variant-numeric:tabular-nums;padding:1px 5px;border-radius:4px;background:var(--studio-soft)}
+#app .review-categories button[aria-pressed=true] {color:var(--studio-accent);border-color:var(--studio-accent);background:var(--studio-selected)}
+.review-columns {display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.85fr);align-items:start;gap:16px}
+#app #weekly-review,#app .review-report {min-width:0;background:var(--studio-surface);border:1px solid var(--studio-line);border-radius:11px}
+#app #weekly-review {overflow:hidden}
+.review-task-list {max-height:max(280px,calc(100dvh - 275px));overflow:auto;overscroll-behavior:contain}
+@media (max-width:700px) {.review-task-list {max-height:none}}
+#app #tracking-page .weekly-row,.review-columns-head {display:grid;grid-template-columns:minmax(120px,2fr) minmax(82px,.8fr) minmax(60px,.7fr) minmax(65px,.65fr);align-items:center;gap:8px}
+.review-columns-head {background:var(--studio-soft);color:var(--studio-muted);padding:9px 14px;font-weight:600;font-size:.92em}
+#app #tracking-page .weekly-row {width:100%;margin:0;padding:calc(var(--row-inset) + 1px) 14px;border:0;border-top:1px solid var(--studio-line);border-radius:0;background:var(--studio-surface);color:var(--studio-ink);text-align:start;font:inherit}
+#app #tracking-page .weekly-row:hover {background:var(--studio-soft)}
+#app #tracking-page .weekly-row[aria-current=true] {background:var(--studio-selected);box-shadow:inset 3px 0 var(--studio-accent)}
+.review-task,.review-status {min-width:0;overflow-wrap:anywhere}
+#tracking-page .weekly-name,#tracking-page .weekly-project {display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#tracking-page .weekly-project,#tracking-page .weekly-end {color:var(--studio-muted)}
+#tracking-page .weekly-progress {color:var(--studio-accent);font-variant-numeric:tabular-nums}
+#tracking-page .weekly-row:focus-visible {outline-offset:-2px}
+#app #tracking-page #weekly-feedback:empty {display:none}
+#tracking-page .weekly-name {font-weight:650}
+.review-task-detail {display:flex;align-items:baseline;flex-wrap:wrap;gap:0 8px;margin-top:3px}
+#tracking-page .weekly-project {font-size:.87em}
+#tracking-page .weekly-flags {display:flex;gap:2px 5px;flex-wrap:wrap}
+.review-reason {font-size:.82em;color:var(--studio-muted)}
+.review-reason + .review-reason::before {content:'·';margin-inline-end:4px}
+.review-reason[data-kind=blocked],.review-reason[data-kind=overdue] {color:#a43c2e}
+:root[data-theme=dark] .review-reason:is([data-kind=blocked],[data-kind=overdue]) {color:#ffb49c}
+#tracking-page .weekly-end,#tracking-page .weekly-progress {text-align:start}
+#tracking-page .weekly-end {font-size:.95em;white-space:nowrap}
+#tracking-page .weekly-progress {display:grid;gap:3px;justify-items:start}
+.weekly-progress progress {width:100%;max-width:84px;height:4px;accent-color:var(--studio-accent)}
+#app .review-report {margin:0;padding:calc(var(--row-inset) + 7px);position:sticky;top:12px}
+.review-form-heading {display:flex;align-items:center;justify-content:space-between;gap:6px;color:var(--studio-muted)}
+#app .review-form-heading button {border:0;background:transparent;font-size:18px;min-width:30px}
+#app .review-report h2 {font:inherit;font-size:1.2em;font-weight:670;overflow-wrap:anywhere;margin:5px 0 12px}
+#app .review-report .form {display:grid;grid-template-columns:minmax(0,1fr);gap:var(--group-gap)}
+#app .review-report :is(input,textarea) {width:100%;min-width:0;font:inherit;color:var(--studio-ink)}
+#app .review-report input:not([type=range]) {background:var(--studio-soft);border:1px solid var(--studio-line);border-radius:6px;min-height:32px;padding:4px 7px}
+#app .review-report input[type=range] {accent-color:var(--studio-accent)}
+#app .review-report .weekly-report-actions button {padding:6px 10px}
+.review-prompt p {line-height:1.5;color:var(--studio-muted);margin:0}
+.review-empty {padding:24px 14px;text-align:center}
+#app #tracking-page .weekly-empty {margin:0 0 8px}
+#app #tracking-page #weekly-feedback {margin-top:12px;padding:0;color:var(--studio-accent);font:inherit}
+#app .workspace-header .view-settings[inert] > summary {opacity:.48;cursor:default}
+@media(max-width:900px) {
+  .review-columns {grid-template-columns:minmax(0,1.3fr) minmax(254px,.85fr);gap:10px}
+  #app #tracking-page .weekly-row,.review-columns-head {grid-template-columns:minmax(90px,1.6fr) minmax(70px,1fr) minmax(55px,.7fr) minmax(38px,.5fr);gap:5px}
+}
+@media(max-width:700px) {
+  .tracking-inner {padding:12px}
+  .review-columns {display:flex;flex-direction:column;align-items:stretch}
+  #app .review-report {position:static}
+  #tracking-page:has(#weekly-report-form) .review-report {order:-1}
+  .review-categories {gap:4px}
+}

@@ -1,0 +1,79 @@
+#app .editor-section .report-note {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  resize: vertical;
+  font: inherit;
+  font-size: calc(12px * var(--ui-scale, 1));
+  line-height: 1.45;
+  color: var(--studio-ink);
+  background: var(--studio-soft);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: var(--row-inset) 9px;
+}
+#app .report-note:focus-visible { outline: 2px solid var(--studio-accent); }
+.weekly-report-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+#app .weekly-report-actions button { min-height: var(--field-height); }
+#app .weekly-report-actions [type=submit] { font-weight: 650; color: var(--studio-accent); background: var(--studio-selected); }
+
+#app .task-tracking,
+#app .milestone-controls { grid-column: 1 / -1; min-width: 0; font-size: calc(13px * var(--ui-scale, 1)); }
+#app .task-tracking { display: grid; gap: var(--group-gap, 12px); }
+#app .tracking-control { display: grid; gap: var(--control-gap); min-width: 0; }
+#app .tracking-control > label,
+#app .progress-heading label { color: var(--studio-muted); font-size: 1em; }
+#app .status-choices { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--control-gap); }
+#app .status-choices button, #app .marker-shapes button, #app .milestone-shortcuts button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: var(--field-height); min-width: 0; padding: 3px 5px;
+  border: 1px solid var(--studio-line); border-radius: 6px;
+  background: var(--studio-surface); color: var(--studio-ink); font: inherit;
+}
+#app[data-ui-size] .status-choices button { justify-content: start; padding: 3px 9px; }
+#app .status-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--dot); }
+#app .status-choices button[aria-pressed=true], #app .marker-shapes button[aria-pressed=true] {
+  border-color: var(--studio-accent); background: var(--studio-selected); color: var(--studio-accent); font-weight: 650;
+}
+#app .custom-status { display: flex; align-items: center; gap: 4px; }
+#app .custom-status input, #app .exact-progress input { width: 100%; min-width: 0; }
+#app .custom-status button { flex: none; width: var(--field-height); height: var(--field-height); padding: 0; font-size: 16px; }
+#app .custom-status button:disabled { display: none; }
+#app .progress-heading { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+#app .progress-heading button { background: transparent; color: var(--studio-muted); border: 1px solid transparent; padding: 2px 5px; font: inherit; }
+#app .progress-heading button[aria-pressed=true] { color: var(--studio-accent); border-color: var(--studio-line); }
+#app .progress-adjust { display: grid; grid-template-columns: minmax(0,1fr) 74px; gap: 8px; align-items: center; }
+#app #editor .progress-adjust input[type=range] {
+  width: 100%; min-width: 0; height: var(--field-height); padding: 0; margin: 0; border: 0;
+  background: transparent; accent-color: var(--studio-accent); cursor: pointer;
+}
+#app .exact-progress { display: flex; align-items: center; gap: 3px; color: var(--studio-muted); }
+#app #editor .exact-progress input { padding-inline: 4px; text-align: right; font-variant-numeric: tabular-nums; }
+#app .milestone-controls {
+  display: grid; gap: 8px; margin: 0; padding: 8px 0 0; border: 0; border-top: 1px solid var(--studio-line);
+}
+#app .milestone-controls legend { padding: 0 6px 0 0; font-weight: 650; color: var(--studio-ink); }
+#app .milestone-shortcuts, #app .marker-shapes { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 4px; }
+#app .milestone-shortcuts button { border-color: transparent; background: var(--studio-soft); }
+#app .marker-shapes button span:empty { display: none; }
+#app .milestone-shortcuts button:disabled { opacity: .5; }
+@media (max-width:700px), (pointer:coarse) {
+  #app #editor :is(.status-choices,.marker-shapes,.milestone-shortcuts) button,
+  #app .progress-heading button, #app .custom-status button, #app #editor .progress-adjust input[type=range] { min-height: 44px; }
+}
+@media (forced-colors:none) {
+  #app #editor [data-progress-slider] { appearance: none; }
+  #app #editor [data-progress-slider]::-webkit-slider-runnable-track {
+    height: 5px; border-radius: 4px;
+    background: linear-gradient(to right, var(--studio-accent) var(--complete), var(--studio-line) var(--complete));
+  }
+  #app #editor [data-progress-slider]::-webkit-slider-thumb {
+    appearance: none; width: 16px; height: 16px; margin-top: -5.5px; border-radius: 50%;
+    background: var(--studio-surface); border: 2px solid var(--studio-accent);
+  }
+  #app #editor [data-progress-slider]::-moz-range-track { height: 5px; border-radius: 4px; background: var(--studio-line); }
+  #app #editor [data-progress-slider]::-moz-range-progress { height: 5px; border-radius: 4px; background: var(--studio-accent); }
+  #app #editor [data-progress-slider]::-moz-range-thumb {
+    width: 12px; height: 12px; border: 2px solid var(--studio-accent); border-radius: 50%; background: var(--studio-surface);
+  }
+}

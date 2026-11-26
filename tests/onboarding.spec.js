@@ -1,0 +1,23 @@
+import { globalClick } from './global-actions.js';
+import {test,expect} from '@playwright/test';
+import {readFileSync} from 'node:fs';
+const seed=JSON.parse(readFileSync(new URL('../public/roadmap.json',import.meta.url),'utf8'));
+const guide=p=>p.locator('#quick-tour'),button=(p,a)=>p.locator(`[data-tour-action="${a}"]`),draft=p=>p.evaluate(()=>JSON.parse(localStorage.getItem('drag.draft')));
+async function complete(page){for(let i=0;i<4;i++)await button(page,'next').click();await expect(guide(page)).not.toBeVisible();}
+test('first use shows four steps with back navigation and leaves the model/history unchanged',async({page})=>{
+ await page.goto('/');await expect(guide(page)).toBeVisible();await expect(page.locator('#tour-title')).toHaveText('建立專案與任務');await expect(button(page,'back')).toBeDisabled();const model=await draft(page);expect(model).toEqual(seed);
+ await button(page,'next').click();await expect(page.locator('#tour-title')).toHaveText('調整時程');await button(page,'back').click();await expect(page.locator('#tour-title')).toHaveText('建立專案與任務');
+ const downloads=[];page.on('download',d=>downloads.push(d));await page.keyboard.press(process.platform==='darwin'?'Meta+s':'Control+s');expect(downloads).toHaveLength(0);
+ for(let i=0;i<3;i++)await button(page,'next').click();await expect(page.locator('#tour-description')).toContainText('網頁版資料和備份只在此瀏覽器，請逐份下載專案 JSON 保存。');
+ await button(page,'next').click();await expect(guide(page)).not.toBeVisible();expect(await draft(page)).toEqual(model);await expect(page.locator('[data-action="undo"]')).toBeDisabled();await page.reload();await expect(guide(page)).not.toBeVisible();expect(await draft(page)).toEqual(model);
+});
+test('reloading an active first-use guide resumes it until explicitly dismissed',async({page})=>{await page.goto('/');await expect(guide(page)).toBeVisible();await page.reload();await expect(guide(page)).toBeVisible();await complete(page);await page.reload();await expect(guide(page)).not.toBeVisible();});
+for(const action of ['skip','close','Escape'])test(`${action} dismisses the guide and does not automatically reopen`,async({page})=>{await page.goto('/');await expect(guide(page)).toBeVisible();const before=await draft(page);if(action==='Escape')await page.keyboard.press('Escape');else await button(page,action).click();await expect(guide(page)).not.toBeVisible();await page.reload();await expect(guide(page)).not.toBeVisible();expect(await draft(page)).toEqual(before);});
+test('existing projects do not trigger first-use guide, and Settings can reopen it without changing private data',async({page})=>{
+ const existing=structuredClone(seed);existing.metadata={custom:['retain',true]};existing.projects[0].locks={color:true};await page.addInitScript(model=>{if(!localStorage.getItem('drag.draft'))localStorage.setItem('drag.draft',JSON.stringify(model));},existing);
+ await page.goto('/');await expect(page.locator('[data-action="global-menu"]')).toBeVisible();await expect(guide(page)).not.toBeVisible();await globalClick(page,'settings');await page.locator('[data-settings-category="about"]').click();await page.locator('[data-settings-action="quick-tour"]').click();await expect(page.locator('#settings-dialog')).not.toBeVisible();await expect(guide(page)).toBeVisible();await complete(page);expect(await draft(page)).toEqual(existing);await expect(page.locator('[data-action="undo"]')).toBeDisabled();
+});
+for(const uiSize of ['small','medium','large'])test(`guide is usable at minimum viewport with ${uiSize} controls and dark theme`,async({page},info)=>{
+ await page.setViewportSize({width:1024,height:700});await page.addInitScript(uiSize=>localStorage.setItem('drag.preferences',JSON.stringify({version:1,values:{uiSize,theme:'dark'}})),uiSize);await page.goto('/');await expect(guide(page)).toBeVisible();const r=await guide(page).boundingBox();expect(r.x).toBeGreaterThanOrEqual(0);expect(r.y).toBeGreaterThanOrEqual(0);expect(r.y+r.height).toBeLessThanOrEqual(701);await expect(button(page,'next')).toBeInViewport();await expect(button(page,'close')).toBeInViewport();await page.screenshot({path:info.outputPath(`guide-${uiSize}.png`),fullPage:true});for(let i=0;i<4;i++)await button(page,'next').press('Enter');await expect(guide(page)).not.toBeVisible();
+});
+test('an invalid stored draft remains intact and does not cause first-use guidance',async({page})=>{await page.addInitScript(()=>localStorage.setItem('drag.draft','invalid'));page.on('dialog',d=>d.accept());await page.goto('/');await expect(page.locator('[data-action="global-menu"]')).toBeVisible();await expect(guide(page)).not.toBeVisible();expect(await page.evaluate(()=>localStorage.getItem('drag.draft'))).toBe('invalid');});

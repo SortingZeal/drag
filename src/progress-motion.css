@@ -1,0 +1,18 @@
+@keyframes progress-stripes {
+  from { transform: translateX(-16px); }
+  to { transform: translateX(0); }
+}
+
+@keyframes completion-sweep {
+  from { transform: translateX(0); }
+  to { transform: translateX(var(--beam-travel)); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-reduce-motion=true]) :is(.timeline-shell:not(.export-capture), .picture-canvas) .bar-progress-motion {
+    animation: progress-stripes var(--stripe-duration) linear infinite;
+  }
+  :root:not([data-reduce-motion=true]) :is(.timeline-shell:not(.export-capture), .picture-canvas) .bar-complete-motion {
+    animation: completion-sweep var(--beam-period) linear infinite;
+  }
+}

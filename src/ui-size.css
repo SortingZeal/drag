@@ -1,0 +1,27 @@
+#app[data-ui-size=small]{--ui-scale:.85;font-size:13.6px}
+#app[data-ui-size=large]{--ui-scale:1.15;font-size:18.4px}
+#app:is([data-ui-size=small],[data-ui-size=large]) header{height:auto;min-height:calc(65px * var(--ui-scale));padding:calc(10px * var(--ui-scale)) calc(20px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) button{padding:calc(7px * var(--ui-scale)) calc(11px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .toolbar{padding:calc(9px * var(--ui-scale)) calc(18px * var(--ui-scale));gap:calc(6px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .toolbar button{padding:calc(6px * var(--ui-scale)) calc(8px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .form{gap:calc(16px * var(--ui-scale));margin-top:calc(22px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .form label,
+#app:is([data-ui-size=small],[data-ui-size=large]) .icon-field>label,
+#app:is([data-ui-size=small],[data-ui-size=large]) .date-nudge b{font-size:calc(13px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .form input,
+#app:is([data-ui-size=small],[data-ui-size=large]) .icon-input input{padding:calc(9px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .editor-title h2{font-size:calc(20px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .snap-control,
+#app:is([data-ui-size=small],[data-ui-size=large]) .report-controls label{font-size:calc(12px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .project-sidebar .aside-title,
+#app:is([data-ui-size=small],[data-ui-size=large]) .project-sidebar .tree-item{font-size:calc(13px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .project-sidebar .aside-title button,
+#app:is([data-ui-size=small],[data-ui-size=large]) .project-sidebar .count{font-size:calc(12px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .project-sidebar .aside-title button{padding:calc(5px * var(--ui-scale)) calc(7px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .project-sidebar .aside-title{flex-wrap:wrap}
+#app:is([data-ui-size=small],[data-ui-size=large]) .project-sidebar .tree-icon,
+#app:is([data-ui-size=small],[data-ui-size=large]) .project-sidebar .phase-icon{font-size:calc(14px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .icon-options button{font-size:calc(21px * var(--ui-scale));min-height:calc(38px * var(--ui-scale));padding:calc(5px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .icon-options button:first-child{font-size:calc(13px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .picture-tools button{min-height:calc(34px * var(--ui-scale));min-width:calc(34px * var(--ui-scale));padding:calc(7px * var(--ui-scale)) calc(10px * var(--ui-scale))}
+#app:is([data-ui-size=small],[data-ui-size=large]) .picture-tools output{font-size:calc(13px * var(--ui-scale))}

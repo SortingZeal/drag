@@ -1,0 +1,47 @@
+/* Date navigation occupies its own row above the scrolling task canvas. */
+.timeline-shell{display:grid;grid-template-rows:var(--timeline-header-height,85px) minmax(0,1fr);min-width:0;min-height:0;overflow:hidden;position:relative;isolation:isolate;contain:paint;background:white}
+.timeline-date-dock{min-width:0;overflow:hidden;position:relative;padding:0 22px;background:var(--g-header-background,#fff);border-bottom:1px solid var(--g-row-border-color,#c7c7c7)}
+.timeline-date-dock .timeline-date-track{height:100%;width:max-content;min-width:100%;overflow:visible;border-radius:0;will-change:transform}
+.timeline-date-dock .grid-header{position:relative;top:0;left:0;z-index:auto;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;background:var(--g-header-background,#fff)}
+.timeline-date-dock .grid-header *{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
+.preview.timeline-viewport{overflow-x:hidden;overflow-y:auto;isolation:isolate;contain:paint;padding:0 22px 18px}
+.timeline-viewport #gantt{position:relative;overflow:hidden}
+.timeline-viewport #gantt>.gantt-container{position:absolute;top:calc(-1 * var(--timeline-header-height));left:0;min-height:0}
+.timeline-viewport .gantt-container .current-highlight{z-index:1}
+.timeline-date-dock .current-ball-highlight{z-index:1}
+.timeline-shell.is-panning-dates,.timeline-shell.is-panning-dates *{cursor:grabbing!important}
+
+/* Labels keep their contrast across the filled and unfilled parts of the track. */
+.bar-tracking-layer ~ .bar-label:not(.big) {
+  paint-order: stroke fill;
+  stroke: var(--progress-label-halo);
+  stroke-opacity: .8;
+  stroke-width: 2px;
+  stroke-linejoin: round;
+}
+.bar-status-text {
+  font-family: inherit;
+  letter-spacing: .1px;
+}
+.timeline-shell .bar-status-badge,.timeline-shell .bar-milestone {cursor:pointer}
+.timeline-shell .bar-milestone-text {font-family:inherit;letter-spacing:.05px}
+.timeline-shell .bar:focus-visible,.timeline-shell [data-edit-field]:focus-visible {outline:2px solid #326894;outline-offset:2px}
+
+:root[data-theme=dark] .timeline-shell:not(.export-capture) .bar-milestone-text {fill:#e1e8ed}
+:root[data-theme=dark] .timeline-shell:not(.export-capture) .milestone-date {fill:#b4c2ce}
+
+/* Keep the instruction inside the upper ruler while its dates pan underneath. */
+.timeline-date-dock{container-type:inline-size}
+.timeline-scale-hint{position:absolute;inset-block-start:2px;inset-inline-end:7px;display:inline-flex;align-items:center;gap:6px;padding:1px 4px 2px 9px;color:var(--g-text-muted,#59675d);background:var(--g-header-background,#fff);font-family:inherit;font-weight:500;font-size:11px;line-height:1.25;pointer-events:none;white-space:nowrap}
+.timeline-scale-hint::after{content:"";width:5px;height:5px;border:solid currentColor;border-width:0 1.5px 1.5px 0;transform:translateY(-1px) rotate(45deg)}
+.timeline-date-dock[aria-expanded=true] .timeline-scale-hint::after{transform:translateY(2px) rotate(225deg)}
+@container (max-width:420px){.timeline-scale-hint span{display:none}.timeline-scale-hint::before{content:attr(data-short)}}
+.timeline-date-dock .grid-header,.timeline-date-dock{cursor:pointer}
+.timeline-date-dock .lower-text,.timeline-date-dock .upper-text{text-underline-offset:3px}
+.timeline-date-dock :is(.lower-text,.upper-text):hover{text-decoration:underline}
+.timeline-date-dock:focus-visible{outline:2px solid var(--studio-accent,#326894);outline-offset:-2px}
+#timeline-scale-menu{position:absolute;top:var(--timeline-header-height);z-index:3;display:grid;min-width:110px;max-height:calc(100% - var(--timeline-header-height));overflow:auto;padding:4px;border:1px solid var(--studio-line,#cdd5d1);border-radius:7px;background:var(--studio-surface,#fff);color:var(--studio-ink,#17231e);box-shadow:0 4px 16px #17231e26}
+#timeline-scale-menu[hidden]{display:none}
+#timeline-scale-menu button{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:5px 9px;min-height:24px;border:0;background:transparent;border-radius:4px;color:inherit;font:inherit;cursor:pointer}
+#timeline-scale-menu button:is(:hover,:focus-visible){background:var(--studio-bg,#eef3f0);outline:1px solid var(--studio-line,#cdd5d1);outline-offset:-1px}
+#timeline-scale-menu [aria-checked=true]::after{content:"✓";color:var(--studio-accent,#326894)}
